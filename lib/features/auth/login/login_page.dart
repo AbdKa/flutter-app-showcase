@@ -19,7 +19,8 @@ class LoginPage extends StatefulWidget with HasPresenter<LoginPresenter> {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginViewModel, LoginPresenter, LoginPage> {
+class _LoginPageState extends State<LoginPage>
+    with PresenterStateMixin<LoginViewModel, LoginPresenter, LoginPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Padding(
@@ -31,7 +32,7 @@ class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginVie
                 decoration: InputDecoration(
                   hintText: appLocalizations.usernameHint,
                 ),
-                onChanged: (text) => presenter.usernameChanged(text), //TODO
+                onChanged: (text) => presenter.onUsernameChange(text), //TODO
               ),
               const SizedBox(height: 8),
               TextField(
@@ -39,7 +40,7 @@ class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginVie
                 decoration: InputDecoration(
                   hintText: appLocalizations.passwordHint,
                 ),
-                onChanged: (text) => presenter.passwordChanged(text), //TODO
+                onChanged: (text) => presenter.onPasswordChange(text), //TODO
               ),
               const SizedBox(height: 16),
               stateObserver(
@@ -47,8 +48,11 @@ class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginVie
                   if (state.isLoading) {
                     return const CircularProgressIndicator();
                   }
+
                   return ElevatedButton(
-                    onPressed: () => presenter.loginPressed(), //TODO
+                    onPressed: !state.isLoginEnabled
+                        ? null
+                        : () => presenter.onLoginPressed(), //TODO
                     child: Text(appLocalizations.logInAction),
                   );
                 },

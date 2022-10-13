@@ -24,21 +24,11 @@ class LoginPresentationModel implements LoginViewModel {
   });
 
   final FutureResult<Either<LogInFailure, User>> loginResult;
-  bool isLoginEnabled;
   String username;
   String password;
 
   @override
-  String get getUsername => username;
-
-  @override
-  String get getPassword => password;
-
-  @override
-  set setUsername(String username) => this.username = username;
-
-  @override
-  set setPassword(String password) => this.password = password;
+  bool isLoginEnabled;
 
   @override
   bool get isLoading => loginResult.isPending();
@@ -60,13 +50,7 @@ class LoginPresentationModel implements LoginViewModel {
 
 /// Interface to expose fields used by the view (page).
 abstract class LoginViewModel {
-  String get getUsername;
-
-  String get getPassword;
-
-  set setUsername(String username);
-
-  set setPassword(String password);
+  bool get isLoginEnabled;
 
   bool get isLoading;
 }
