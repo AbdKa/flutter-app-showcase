@@ -37,16 +37,7 @@ class LoginPresenter extends Cubit<LoginViewModel> {
 
     await await logInUseCase
         .execute(username: _model.username, password: _model.password)
-        .observeStatusChanges(
-          (result) => emit(
-            _model.copyWith(
-              loginResult: result,
-              isLoginEnabled: _model.isLoginEnabled,
-              username: _model.username,
-              password: _model.password,
-            ),
-          ),
-        )
+        .observeStatusChanges((result) => emit(_model.copyWith(loginResult: result, isLoginEnabled: _model.isLoginEnabled, username: _model.username, password: _model.password,)))
         .asyncFold(
           (fail) => navigator.showError(fail.displayableFailure()),
           (success) => navigator.showAlert(title: appLocalizations.successfulTitle, message: appLocalizations.welcomeMessage(_model.username)), //todo!
