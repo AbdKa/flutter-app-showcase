@@ -12,4 +12,28 @@ class LoginPresenter extends Cubit<LoginViewModel> {
 
   // ignore: unused_element
   LoginPresentationModel get _model => state as LoginPresentationModel;
+
+  void usernameChanged(String username) {
+    _model.setUsername = username;
+    updateState();
+  }
+
+  void passwordChanged(String password) {
+    _model.setPassword = password;
+    updateState();
+  }
+
+  void loginPressed() {
+    if(!_model.isLoginEnabled) {
+      return;
+    }
+
+    updateState();
+  }
+
+  void updateState() {
+    emit(_model.copyWith(isLoginEnabled: _model.username.isNotEmpty && _model.password.isNotEmpty));
+  }
+
+
 }
