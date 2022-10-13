@@ -4,7 +4,7 @@ import 'package:flutter_demo/features/auth/login/login_page.dart';
 import 'package:flutter_demo/navigation/app_navigator.dart';
 import 'package:flutter_demo/navigation/no_routes.dart';
 
-class LoginNavigator with NoRoutes {
+class LoginNavigator with NoRoutes, LoginRoute {
   LoginNavigator(this.appNavigator);
 
   @override
